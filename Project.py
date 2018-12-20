@@ -43,13 +43,13 @@ for dir_ in dirs:
     i+=1
         
 
-#PlotBar of n_docs with respect to class
+#Pie Plot of n_docs with respect to class
+import matplotlib.pyplot as plt
+plt.figure(1,figsize=(16,16))
 df=pd.DataFrame(pd.Series(dic_stats))
 df=df.reset_index()
 df.columns=["Type of docs","Numbers of docs"]
-df.plot.bar(x="Type of docs")
-
-import matplotlib.pyplot as plt
+df.plot(kind='pie', y = 'Numbers of docs', autopct='%1.1f%%', startangle=90, shadow=False, labels=df['Type of docs'], legend = False, fontsize=9)
 plt.show()
 plt.savefig('Repartition of documents')
 
@@ -74,7 +74,7 @@ import sklearn.metrics as skm
 f1_score_gnb = skm.f1_score(y_test, y_pred,average="micro")
 conf_mat_gnb=skm.confusion_matrix(y_test,y_pred)
 
-plt.figure(figsize=(10,10))
+plt.figure(2,figsize=(10,10))
 plt.matshow(conf_mat_gnb)
 plt.colorbar()
 plt.title("Confusion matrix for Gaussian NB method")
@@ -91,7 +91,7 @@ f1_score_rf=skm.f1_score(y_test,y_pred,average="micro")
 
 conf_mat_rf=skm.confusion_matrix(y_test,y_pred)
 
-plt.figure(figsize=(10,10))
+plt.figure(3,figsize=(10,10))
 plt.matshow(conf_mat_rf)
 plt.colorbar()
 plt.title("Confusion matrix for Random Forest method")
