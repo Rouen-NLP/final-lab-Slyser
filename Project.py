@@ -71,7 +71,7 @@ f1_score_gnb = f1_score(y_test, y_pred,average="macro")
 
 #%% Classification RF
 from sklearn.ensemble import RandomForestClassifier
-clf = RandomForestClassifier(n_estimators=100)
+clf = RandomForestClassifier(n_estimators=500)
 clf.fit(X_train,y_train)
 y_pred=clf.predict(X_test)
-f1_score_rf=f1_score(y_test,y_pred,average="macro")
+f1_score_rf=f1_score(y_test,y_pred,average="micro")
