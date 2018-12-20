@@ -45,7 +45,7 @@ for dir_ in dirs:
 
 #Pie Plot of n_docs with respect to class
 import matplotlib.pyplot as plt
-plt.figure(1,figsize=(16,16))
+
 df=pd.DataFrame(pd.Series(dic_stats))
 df=df.reset_index()
 df.columns=["Type of docs","Numbers of docs"]
@@ -56,7 +56,6 @@ plt.savefig('Repartition of documents')
 
 
 #%% Vectorization:
-from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 
@@ -64,36 +63,32 @@ matrix = CountVectorizer()
 X = matrix.fit_transform(texts).toarray()
 X_train, X_test, y_train, y_test = train_test_split(X, labels, test_size=0.33, random_state=42)
 
-#%% Classification Gaussian
-gnb = GaussianNB()
-gnb.fit(X_train,y_train)
-y_pred = gnb.predict(X_test)
-
-#Accuracy 
+#%% Classification  
 import sklearn.metrics as skm
-f1_score_gnb = skm.f1_score(y_test, y_pred,average="micro")
-conf_mat_gnb=skm.confusion_matrix(y_test,y_pred)
 
-plt.figure(2,figsize=(10,10))
-plt.matshow(conf_mat_gnb)
-plt.colorbar()
-plt.title("Confusion matrix for Gaussian NB method")
-plt.show()
-print("Gaussian naive Baies f1_score: ",f1_score_gnb)
+def classification(classifier,X_train,y_train,X_test):
+    clf=classifier
+    clf.fit(X_train,y_train)
+    y_pred=clf.predict(X_test)
+    return y_pred
 
+def show_results(classifier_name,y_pred,y_test):
+    conf_mat=skm.confusion_matrix(y_test,y_pred)
+    
+    #plt.figure(2,figsize=(10,10))
+    plt.matshow(conf_mat)
+    plt.colorbar()
+    plt.title("Confusion matrix for " + classifier_name)
+    plt.show()
+    print("Results for " + classifier_name+" \n \n", skm.classification_report(y_test, y_pred))
 
-#%% Classification RF
+from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
-clf = RandomForestClassifier(n_estimators=500)
-clf.fit(X_train,y_train)
-y_pred=clf.predict(X_test)
-f1_score_rf=skm.f1_score(y_test,y_pred,average="micro")
 
-conf_mat_rf=skm.confusion_matrix(y_test,y_pred)
+gnb=GaussianNB()
+y_pred_gnb=classification(gnb,X_train,y_train,X_test)
+show_results("Naive Bayes", y_pred_gnb, y_test)
 
-plt.figure(3,figsize=(10,10))
-plt.matshow(conf_mat_rf)
-plt.colorbar()
-plt.title("Confusion matrix for Random Forest method")
-plt.show()
-print("Random Forest f1_score: ",f1_score_rf)
+rf = RandomForestClassifier(n_estimators=500)
+y_pred_rf=classification(rf,X_train,y_train,X_test)
+show_results("Random Forest", y_pred_rf, y_test)
