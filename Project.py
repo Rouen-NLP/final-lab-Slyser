@@ -9,7 +9,7 @@ Created on Thu Nov  8 15:44:38 2018
 import os
 import pandas as pd
 
-#%% Analyse des données
+#%% Data Analysis
 dirs=[]
 [dirs.append(x[0]) for x in os.walk("data/")]
 dirs=dirs[1:]
