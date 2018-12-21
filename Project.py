@@ -66,7 +66,6 @@ pie = df.plot(
 fig = pie.get_figure()
 fig.savefig("RepDocs.png")
 
-
 # %% Vectorization:
 
 matrix = CountVectorizer()
