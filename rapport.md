@@ -1,3 +1,4 @@
+
 # Classification des documents du procès des groupes américains du tabac
 ### Hugo LEROGERON
 
@@ -30,4 +31,31 @@ Nous voyons que les catégories _Letter_,_Email_, _Form_, et principalement _Mem
 
 __Cependant, cette distribution imparfaite n'est pas si importante: la classe la plus représentée n'est représentée qu'à 17.8% soit environ 6 fois plus que la moins représentée . Ainsi, des méthodes de ré-échantillonnage dont l'efficacité est incertaine  paraissent superflues. Il conviendra cependant de vérifier les résultats des classificateurs via matrice de confusion__
 
-## 2. Données et Solutions.
+## 2. Solution Envisagée.
+
+
+### 2.1 Pré-traitement des données .
+
+La seconde étape consiste à préparer les données à leur classification. 
+
+Nous avons donc environ 3500 textes appartenant à 1 parmi 10 catégories possibles. Le label est déterminé par le dossier dans lequel le document appartient. On supposera que les labels sont sans erreur. Les données sont ensuite placées sous forme de matrice comptant le nombre de fois un mot est présent dans un document via _sklearn CountVectorizer_. 
+
+Les données sont ensuite séparées en jeux d'apprentissage et de test selon les proportions 2/3 et 1/3.
+
+### 2.2 Classificateur.
+
+Pour avoir une _baseline_, on utilisera d'abord une classification par Bayes naïf. 
+Peu importe le classificateur, les prédictions se feront via la méthode classification prenant en entrée le classificateur et les données. 
+
+On tentera ensuite d'améliorer les résultats via un Random Forest.
+
+ Les algorithmes ne seront pas réimplantées mais utilisées via la bibliothèque sklearn. 
+
+### 2.3 Affichage des résultats. 
+
+On mesurera la performance via la méthode _show_results_. Celle ci affichera la matrice de confusion ainsi que diverses métriques comme le score f1, qui nous servira de référence pour les comparaisons. 
+
+## 3. Résultats.
+
+
+
