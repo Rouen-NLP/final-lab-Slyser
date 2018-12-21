@@ -36,14 +36,14 @@ for dir_ in dirs:
     #import data in lists
     files=os.listdir(dir_)
     for file in files:
-        with open(dir_ +'/'+file) as f:
+        with open(dir_ +'/'+file,encoding="utf-8") as f:
             text=f.read()
             texts.append(text)
             labels.append(i)
     i+=1
         
 
-#Pie Plot of n_docs with respect to class
+#%%Pie Plot of n_docs with respect to class
 import matplotlib.pyplot as plt
 
 df=pd.DataFrame(pd.Series(dic_stats))
