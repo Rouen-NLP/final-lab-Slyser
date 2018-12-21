@@ -63,6 +63,7 @@ On obtient des résultats relativement convenables avec un simple bayes naïf. L
 Les classes ne sont bien aussi bien comprises les unes que les autres par le classificateur cela dit. Par exemple, la classe 2 (_email_) est très bien classifiée avec un score de 81%, contre seulement 31% pour la classe 7 (_Report_). Cela ne semble pas être du au nombre de données car la classe la moins représentée, _Resume,_ obtient un score de 75% contre 61% pour la classe la plus représentée. 
 
 La matrice de confusion illustre bien cette idée: 
+
 ![Matrice de Confusion Bayes](./Confusion_Matrix_of_Naive_Bayes.png)  
 
 ### 3.2 Avec Random Forest
@@ -71,8 +72,20 @@ Comme prévu, on obtient de meilleurs résultats avec le random forest. En effet
 De nouveau les classes ne sont pas identiquement bien prédites. Les tendances vues avec Bayes se confirment: les classes 2 et 8 sont très bien classés avec 0.95 de score f1. De même, la classe 7 est très mal prédite avec seulement 37% de score f1. Cela est du à un très mauvais recall de 24%: il semble difficile pour les classificateurs de bien retrouver les exemples de documents de type _Report_. Cela peut être du à la faible représentation du document conjugué à une ressemblance globale  aux autre classes.
 
  On peut le voir sur la matrice de confusion: 
+ 
  ![Matrice de Random Forest](./Confusion_Matrix_of_Random_Forest.png)
 
+Les couleurs dans la ligne 7 montre que cette classe est souvent mal prédite: le classificateur préférant l'associer aux classes 3 (_Lettre_) et 4 (_Memo_). 
+
+## 4. Pistes d'améliorations et Conclusion
+
+Le meilleur moyen d'améliorer les performances de notre projet serait d'obtenir plus de données. Si c'est impossible, on pourrait essayer plus de pré-traitement sur les données, comme des représentations TF-IDF, bien que cela ne soit pas toujours utile. 
+
+Pour améliorer les résultats du Random Forest, on pourrait faire de la recherche d'hyper-paramètres par validation croisée mais cela risque d'augmenter artificiellement les performances de notre module: on risquerait le sur-apprentissage et on perdrait en performance avec de nouvelles données. 
+
+On pourrait enfin passer à des modèles de plus grande envergure comme des LSTM en utilisant des _embedding_ comme _Glove_. 
+
+En conclusion, notre modèle permet bien de classifier les textes en fonction de leur catégories, mais la relative imprécision peut mettre en doute les résultats proposés. 
 
 
 
