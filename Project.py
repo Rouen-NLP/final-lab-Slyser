@@ -64,14 +64,14 @@ pie = df.plot(
         18,
          18))
 fig = pie.get_figure()
-fig.savefig("Repartition of documents.png")
+fig.savefig("RepDocs.png")
 
 
 # %% Vectorization:
 
 matrix = CountVectorizer()
 X = matrix.fit_transform(texts).toarray()
-X_train, X_test, y_train, y_test = train_test_split(X, labels, test_size=0.25)
+X_train, X_test, y_train, y_test = train_test_split(X, labels, test_size=0.33)
 del X
 
 # %% Classification
@@ -86,11 +86,10 @@ def classification(classifier, X_train, y_train, X_test):
 def show_results(classifier_name, y_pred, y_test):
     conf_mat = skm.confusion_matrix(y_test, y_pred)
 
-    # plt.figure(2,figsize=(10,10))
+    plt.figure(2,figsize=(20,20))
     plt.matshow(conf_mat)
     plt.colorbar()
     plt.title("Confusion matrix for " + classifier_name)
-    plt.show()
     print(
         "Results for " +
         classifier_name +
@@ -98,14 +97,16 @@ def show_results(classifier_name, y_pred, y_test):
         skm.classification_report(
             y_test,
             y_pred))
-    plt.savefig("Confusion Matrix of" +
+    plt.savefig("Confusion_Matrix_of_" +
                 classifier_name)
+    plt.show()
+
 
 
 gnb = GaussianNB()
 y_pred_gnb = classification(gnb, X_train, y_train, X_test)
-show_results("Naive Bayes", y_pred_gnb, y_test)
+show_results("Naive_Bayes", y_pred_gnb, y_test)
 
-rf = RandomForestClassifier(n_estimators=500)
+rf = RandomForestClassifier(n_estimators=700)
 y_pred_rf = classification(rf, X_train, y_train, X_test)
-show_results("Random Forest", y_pred_rf, y_test)
+show_results("Random_Forest", y_pred_rf, y_test)
