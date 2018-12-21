@@ -77,6 +77,7 @@ De nouveau les classes ne sont pas identiquement bien prédites. Les tendances v
 
 Les couleurs dans la ligne 7 montre que cette classe est souvent mal prédite: le classificateur préférant l'associer aux classes 3 (_Lettre_) et 4 (_Memo_). 
 
+
 ## 4. Pistes d'améliorations et Conclusion
 
 Le meilleur moyen d'améliorer les performances de notre projet serait d'obtenir plus de données. Si c'est impossible, on pourrait essayer plus de pré-traitement sur les données, comme des représentations TF-IDF, bien que cela ne soit pas toujours utile. 
